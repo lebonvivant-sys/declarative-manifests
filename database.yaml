@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres-app
+  name: postgres-app
+spec:
+  selector:
+    matchLabels:
+      app: postgres-app
+  template:
+    metadata:
+      labels:
+        app: postgres-app
+      name: postgres-app
+    spec:
+      serviceAccountName: useroot
+      hostname: postgres
+      containers:
+        - name: postgres-app
+          env:
+          - name: POSTGRES_USER
+            value: user
+          - name: POSTGRES_PASSWORD
+            value: password
+          - name: HOSTNAME
+            value: postgres
+          image: quay.io/klaj2210/postgres:v1
+          name: postgres
+          #image: docker.io/library/postgres:10-alpine  
+          ports:
+          - containerPort: 5432
+            name: postgres-app
+

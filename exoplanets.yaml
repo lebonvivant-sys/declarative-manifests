@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: exoplanets-app
+  name: exoplanets-app
+spec:
+  selector:
+    matchLabels:
+      app: exoplanets-app
+  template:
+    metadata:
+      labels:
+        app: exoplanets-app
+      name: exoplanets-app
+    spec:
+      serviceAccountName: useroot
+      containers:
+        - name: exoplanets-app
+          env:
+          - name: DB_USER
+            value: user
+          - name: DB_PASSWORD
+            value: password
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_NAME
+            value: postgres
+          - name: DB_HOST
+            value: postgres-app
+          image: quay.io/klaj2210/exoplanets:v2
+          name: exoplanets
+          ports:
+          - containerPort: 8080
+            name: exoplanets-app
+
