@@ -16,7 +16,7 @@ spec:
       name: postgres-app
     spec:
       serviceAccountName: useroot
-      hostname: postgres
+      hostname: postgres-app
       containers:
         - name: postgres-app
           env:
@@ -25,9 +25,9 @@ spec:
           - name: POSTGRES_PASSWORD
             value: password
           - name: HOSTNAME
-            value: postgres
+            value: postgres-app
           image: quay.io/klaj2210/postgres:v1
-          name: postgres
+          name: postgres-app
           #image: docker.io/library/postgres:10-alpine  
           ports:
           - containerPort: 5432
